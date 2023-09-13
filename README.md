@@ -1,4 +1,4 @@
-#React Reduxjs toolkit based application
+# React Reduxjs toolkit based application
 
 _WatchNow a movie website, to search and get the details of the any movies or shows_
 _Styling of the website using sass_
