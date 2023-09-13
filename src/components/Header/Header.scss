@@ -63,8 +63,17 @@
   }
 }
 
-// @media only screen (max-width: 500px) {
-//   .user-image {
-//     display: block;
-//   }
-// }
+@media only screen and (max-width: 600px) {
+  .logo-section .logo {
+    display: none;
+  }
+
+  .search-bar {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .search-bar input::placeholder {
+    font-size: 12px;
+  }
+}

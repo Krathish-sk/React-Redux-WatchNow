@@ -24,7 +24,7 @@ export const fetchAsyncShows = createAsyncThunk(
 export const fetchAsyncMovieOrShowDetail = createAsyncThunk(
   "movies/fetchAsyncMovieOrShowDetail",
   async (id) => {
-    const response = await movieApi.get(`${APIKey}&i=${id}&Plot=short`);
+    const response = await movieApi.get(`${APIKey}&i=${id}&Plot=full`);
     return response.data;
   }
 );
