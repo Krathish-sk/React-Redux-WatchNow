@@ -12,4 +12,4 @@ _4. react-slick_
 
 ## Features
 
-+Render all movies +Render all shows +Get Single movie/show details +Search movies
+_Render all movies, Render all shows, Get Single movie/show details, Search movies_
