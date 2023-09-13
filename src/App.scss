@@ -1,0 +1,22 @@
+@import "./common/colors.scss";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@1,6..12,400;1,6..12,600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  background-color: $primary-color;
+}
+
+a {
+  text-decoration: none;
+  color: $logo-color;
+}
+
+.container {
+  margin: 0 40px;
+}
