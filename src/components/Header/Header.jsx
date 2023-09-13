@@ -10,6 +10,7 @@ import {
 } from "../../features/movies/movieSlice";
 
 export default function Header() {
+  const [openLogin, setOpenLogin] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
@@ -43,8 +44,25 @@ export default function Header() {
           </button>
         </form>
       </div>
-      <div className="user-image">
-        <img src={user} alt="user" />
+      <div className="login-container">
+        {openLogin && (
+          <div className="open-login">
+            <div className="logedIn">
+              <button>Profile</button>
+              <button>Logout</button>
+            </div>
+            {/* <div>
+              <button className="logedOut">Log-In</button>
+            </div> */}
+          </div>
+        )}
+        <div className="user-image">
+          <img
+            src={user}
+            alt="user"
+            onClick={() => setOpenLogin((prev) => !prev)}
+          />
+        </div>
       </div>
     </div>
   );
