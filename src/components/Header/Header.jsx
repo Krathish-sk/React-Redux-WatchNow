@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import logo from "../../images/Logo.png";
 import user from "../../images/user.png";
 import "./Header.scss";
 import {
@@ -23,9 +24,12 @@ export default function Header() {
 
   return (
     <div className="header">
-      <div className="logo">
-        <Link to="/">WatchNow</Link>
-      </div>
+      <Link to="/">
+        <div className="logo-section">
+          <img src={logo} alt="Logo" />
+          <div className="logo">WatchNow</div>
+        </div>
+      </Link>
       <div className="search-bar">
         <form onSubmit={submitHandler}>
           <input
