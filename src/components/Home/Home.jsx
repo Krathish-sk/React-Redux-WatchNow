@@ -14,6 +14,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchAsyncMovies(movieText));
     dispatch(fetchAsyncShows(showText));
+    // eslint-disable-next-line
   }, []);
 
   return (

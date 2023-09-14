@@ -16,7 +16,7 @@ export default function MovieDetail() {
     dispatch(fetchAsyncMovieOrShowDetail(imdbID));
     return () => {
       dispatch(removeSelectedMovieOrShow());
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   return (

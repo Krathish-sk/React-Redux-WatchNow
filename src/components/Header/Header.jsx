@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { auth, provider } from "../../firebase";
 import logo from "../../images/Logo.png";
-import user from "../../images/user.png";
+import User from "../../images/user.png";
 import "./Header.scss";
 import {
   fetchAsyncMovies,
   fetchAsyncShows,
 } from "../../features/movies/movieSlice";
+import { updateUser, logoutUser } from "../../features/user/userSlice";
 
 export default function Header() {
   const [openLogin, setOpenLogin] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.user);
 
+  // Serach Submit
   function submitHandler(e) {
     e.preventDefault();
     if (search !== "") {
@@ -21,6 +26,26 @@ export default function Header() {
       dispatch(fetchAsyncShows(search));
       setSearch("");
     }
+  }
+
+  // Sign In User
+  async function signInUser() {
+    const { user } = await signInWithPopup(auth, provider);
+    const { displayName, email, phoneNumber, photoURL, uid } = user;
+    const userDetails = {
+      displayName,
+      email,
+      phoneNumber,
+      photoURL,
+      uid,
+    };
+    dispatch(updateUser(userDetails));
+  }
+
+  // Sign Out User
+  async function signOutUser() {
+    await signOut(auth);
+    dispatch(logoutUser());
   }
 
   return (
@@ -48,17 +73,20 @@ export default function Header() {
         {openLogin && (
           <div className="open-login">
             <div className="logedIn">
-              <button>Profile</button>
-              <button>Logout</button>
+              <Link to="/userprofile">
+                <button>Profile</button>
+              </Link>
+              <button onClick={signOutUser}>Logout</button>
             </div>
-            {/* <div>
-              <button className="logedOut">Log-In</button>
-            </div> */}
+            <div className="logedOut">
+              <button onClick={signInUser}>Log-In</button>
+            </div>
           </div>
         )}
         <div className="user-image">
           <img
-            src={user}
+            // src={userInfo ? userInfo.photoURL : User}
+            src={User}
             alt="user"
             onClick={() => setOpenLogin((prev) => !prev)}
           />

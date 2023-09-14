@@ -5,6 +5,7 @@ import MovieCard from "./MovieCard/MovieCard";
 import MovieDetail from "./MovieDetail/MovieDetail";
 import MovieListing from "./MovieListing/MovieListing";
 import PageNotFound from "./PageNotFound/PageNotFound";
+import UserPage from "./User/UserPage";
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   MovieDetail,
   MovieListing,
   PageNotFound,
+  UserPage,
 };
