@@ -1,5 +1,15 @@
 @import "../../common/colors.scss";
 
+.main {
+  display: flex;
+  flex-direction: column;
+
+  svg {
+    margin-top: 10px;
+    font-size: 25px;
+  }
+}
+
 .movie-section {
   display: flex;
   justify-content: space-evenly;
