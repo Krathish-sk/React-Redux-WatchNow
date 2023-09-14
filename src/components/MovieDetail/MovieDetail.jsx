@@ -24,7 +24,7 @@ export default function MovieDetail() {
     <div className="main">
       <div className="back">
         <Link to="/">
-          <IoMdArrowRoundBack />
+          <IoMdArrowRoundBack className="back-button" />
         </Link>
       </div>
       <div className="movie-section">

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDoneOutline } from "react-icons/md";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { updateUser } from "../../features/user/userSlice";
 import "./UserPage.scss";
 import User from "../../images/user.png";
@@ -17,6 +19,7 @@ export default function UserPage() {
     userInfo.address ? userInfo.address : ""
   );
 
+  // Edit Submit
   function editSubmitHandler() {
     if (name && email && phone && address) {
       const userDetails = {
@@ -34,77 +37,84 @@ export default function UserPage() {
   }
 
   return (
-    <div className="user">
-      <div className="main-container">
-        <div className="left-container">
-          <div className="image-section">
-            <img
-              src={userInfo.photoURL ? userInfo.photoURL : User}
-              alt={userInfo.displayName}
-            />
-          </div>
-          <div className="title-section">
-            {editUser ? (
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            ) : (
-              <h2>{userInfo.displayName}</h2>
-            )}
-          </div>
-        </div>
-        <div className="right-container">
-          <div className="right-heading">
-            <h3>User Details</h3>
-          </div>
-          <div className="right-info">
-            <div className="info">
-              <h3>Email</h3>
-              {editUser ? (
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              ) : (
-                <p>{userInfo.email}</p>
-              )}
-            </div>
-            <div className="info">
-              <h3>Phone Number</h3>
-              {editUser ? (
-                <input
-                  type="number"
-                  required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              ) : (
-                <p>{userInfo.phoneNumber ? userInfo.phoneNumber : "--"}</p>
-              )}
-            </div>
-            <div className="info">
-              <h3>Address</h3>
-              {editUser ? (
-                <textarea
-                  required
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                ></textarea>
-              ) : (
-                <p>{userInfo.address ? userInfo.address : "--"}</p>
-              )}
-            </div>
-          </div>
-        </div>
+    <div className="main">
+      <div className="back">
+        <Link to="/">
+          <IoMdArrowRoundBack className="back-button" />
+        </Link>
       </div>
-      <div className="edit-profile">
-        <FaUserEdit onClick={() => setEditUser((prev) => !prev)} />
-        {editUser && <MdDoneOutline onClick={editSubmitHandler} />}
+      <div className="user">
+        <div className="main-container">
+          <div className="left-container">
+            <div className="image-section">
+              <img
+                src={userInfo.photoURL ? userInfo.photoURL : User}
+                alt={userInfo.displayName}
+              />
+            </div>
+            <div className="title-section">
+              {editUser ? (
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              ) : (
+                <h2>{userInfo.displayName}</h2>
+              )}
+            </div>
+          </div>
+          <div className="right-container">
+            <div className="right-heading">
+              <h3>User Details</h3>
+            </div>
+            <div className="right-info">
+              <div className="info">
+                <h3>Email</h3>
+                {editUser ? (
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                ) : (
+                  <p>{userInfo.email}</p>
+                )}
+              </div>
+              <div className="info">
+                <h3>Phone Number</h3>
+                {editUser ? (
+                  <input
+                    type="number"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                ) : (
+                  <p>{userInfo.phoneNumber ? userInfo.phoneNumber : "--"}</p>
+                )}
+              </div>
+              <div className="info">
+                <h3>Address</h3>
+                {editUser ? (
+                  <textarea
+                    required
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  ></textarea>
+                ) : (
+                  <p>{userInfo.address ? userInfo.address : "--"}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="edit-profile">
+          <FaUserEdit onClick={() => setEditUser((prev) => !prev)} />
+          {editUser && <MdDoneOutline onClick={editSubmitHandler} />}
+        </div>
       </div>
     </div>
   );
