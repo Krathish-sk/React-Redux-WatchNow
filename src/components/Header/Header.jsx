@@ -72,15 +72,18 @@ export default function Header() {
       <div className="login-container">
         {openLogin && (
           <div className="open-login">
-            <div className="logedIn">
-              <Link to="/userprofile">
-                <button>Profile</button>
-              </Link>
-              <button onClick={signOutUser}>Logout</button>
-            </div>
-            <div className="logedOut">
-              <button onClick={signInUser}>Log-In</button>
-            </div>
+            {userInfo.length !== 0 ? (
+              <div className="logedIn">
+                <Link to="/userprofile">
+                  <button>Profile</button>
+                </Link>
+                <button onClick={signOutUser}>Logout</button>
+              </div>
+            ) : (
+              <div className="logedOut">
+                <button onClick={signInUser}>Log-In</button>
+              </div>
+            )}
           </div>
         )}
         <div className="user-image">
