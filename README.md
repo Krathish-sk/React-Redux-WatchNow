@@ -9,7 +9,9 @@ _1. react-redux redujs/toolkit_
 _2. axios_
 _3. react-router-dom_
 _4. react-slick_
+_5. firebase_
+_6. react-icons_
 
 ## Features
 
-_Render all movies, Render all shows, Get Single movie/show details, Search movies_
+_Render all movies, Render all shows, Get Single movie/show details, Search movies, User authentication, User profile edit/update_
