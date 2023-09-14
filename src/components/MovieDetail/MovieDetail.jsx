@@ -2,17 +2,37 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { AiTwotoneHeart } from "react-icons/ai";
 import {
   fetchAsyncMovieOrShowDetail,
   removeSelectedMovieOrShow,
 } from "../../features/movies/movieSlice";
+import { userLikedMovies } from "../../features/user/userSlice";
 import "./MovieDetail.scss";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const { imdbID } = useParams();
   const { selectedMovieOrShow: data } = useSelector((state) => state.movies);
+  const { likedMovies } = useSelector((state) => state.user);
 
+  // Like or dislike a movie
+  function handleLikeMovie() {
+    if (liked.length === 0) {
+      const movies = [...likedMovies, data];
+      dispatch(userLikedMovies(movies));
+    } else {
+      const movies = likedMovies.filter(
+        (movie) => movie.imdbID !== data.imdbID
+      );
+      dispatch(userLikedMovies(movies));
+    }
+  }
+
+  // Check for liked movie
+  const liked = likedMovies.filter((movie) => movie.imdbID === data.imdbID);
+
+  // Get Individual movie/show details
   useEffect(() => {
     dispatch(fetchAsyncMovieOrShowDetail(imdbID));
     return () => {
@@ -33,7 +53,13 @@ export default function MovieDetail() {
         ) : (
           <>
             <div className="section-left">
-              <div className="movie-title">{data.Title}</div>
+              <div className="title">
+                <div className="movie-title">{data.Title}</div>
+                <AiTwotoneHeart
+                  className={`${liked.length === 0 ? "liked-false" : "liked"}`}
+                  onClick={handleLikeMovie}
+                />
+              </div>
               <div className="movie-rating">
                 <span>
                   IMDB rating <i className="fa fa-star"></i> :{" "}

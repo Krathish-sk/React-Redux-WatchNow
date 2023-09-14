@@ -28,6 +28,7 @@ export default function UserPage() {
         email,
         address,
         photoURL: userInfo.photoURL,
+        uid: userInfo.uid,
       };
       dispatch(updateUser(userDetails));
       setEditUser((prev) => !prev);
