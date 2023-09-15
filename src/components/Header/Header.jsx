@@ -49,6 +49,7 @@ export default function Header() {
 
     await signOut(auth);
     dispatch(logoutUser());
+    window.location.reload();
   }
 
   return (
