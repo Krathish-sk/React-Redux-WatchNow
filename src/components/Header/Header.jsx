@@ -19,7 +19,6 @@ export default function Header() {
   const { userInfo } = useSelector((state) => state.user);
 
   const urlData = useLocation();
-  console.log("🚀 ~ file: Header.jsx:22 ~ Header ~ paramsData:", urlData);
 
   // Serach Submit
   function submitHandler(e) {
