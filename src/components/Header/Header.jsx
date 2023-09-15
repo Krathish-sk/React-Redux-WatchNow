@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, provider } from "../../firebase";
@@ -17,6 +17,9 @@ export default function Header() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user);
+
+  const urlData = useLocation();
+  console.log("🚀 ~ file: Header.jsx:22 ~ Header ~ paramsData:", urlData);
 
   // Serach Submit
   function submitHandler(e) {
@@ -60,19 +63,21 @@ export default function Header() {
           <div className="logo">WatchNow</div>
         </div>
       </Link>
-      <div className="search-bar">
-        <form onSubmit={submitHandler}>
-          <input
-            type="text"
-            placeholder="Search Movies or Shows"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button type="submit">
-            <i className="fa fa-search"></i>
-          </button>
-        </form>
-      </div>
+      {urlData.pathname === "/" && (
+        <div className="search-bar">
+          <form onSubmit={submitHandler}>
+            <input
+              type="text"
+              placeholder="Search Movies or Shows"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button type="submit">
+              <i className="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+      )}
       <div className="login-container">
         {openLogin && (
           <div className="open-login">
