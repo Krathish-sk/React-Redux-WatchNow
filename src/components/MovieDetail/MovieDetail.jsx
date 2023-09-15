@@ -14,18 +14,22 @@ export default function MovieDetail() {
   const dispatch = useDispatch();
   const { imdbID } = useParams();
   const { selectedMovieOrShow: data } = useSelector((state) => state.movies);
-  const { likedMovies } = useSelector((state) => state.user);
+  const { likedMovies, userInfo } = useSelector((state) => state.user);
 
   // Like or dislike a movie
   function handleLikeMovie() {
-    if (liked.length === 0) {
-      const movies = [...likedMovies, data];
-      dispatch(userLikedMovies(movies));
+    if (userInfo.length !== 0) {
+      if (liked.length === 0) {
+        const movies = [...likedMovies, data];
+        dispatch(userLikedMovies(movies));
+      } else {
+        const movies = likedMovies.filter(
+          (movie) => movie.imdbID !== data.imdbID
+        );
+        dispatch(userLikedMovies(movies));
+      }
     } else {
-      const movies = likedMovies.filter(
-        (movie) => movie.imdbID !== data.imdbID
-      );
-      dispatch(userLikedMovies(movies));
+      alert("Please Log-In to add Like");
     }
   }
 

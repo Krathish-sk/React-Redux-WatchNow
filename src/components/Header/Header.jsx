@@ -88,8 +88,7 @@ export default function Header() {
         )}
         <div className="user-image">
           <img
-            // src={userInfo ? userInfo.photoURL : User}
-            src={User}
+            src={userInfo.length !== 0 ? userInfo.photoURL : User}
             alt="user"
             onClick={() => setOpenLogin((prev) => !prev)}
           />

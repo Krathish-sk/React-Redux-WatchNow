@@ -5,7 +5,7 @@ import { AiTwotoneHeart } from "react-icons/ai";
 import "./MovieCard.scss";
 
 export default function MovieCard({ data }) {
-  const { likedMovies } = useSelector((state) => state.user);
+  const { likedMovies, userInfo } = useSelector((state) => state.user);
 
   const likedMovie = likedMovies.filter(
     (movie) => movie.imdbID === data.imdbID
@@ -22,7 +22,9 @@ export default function MovieCard({ data }) {
             <div className="card-info">
               <h4>{data.Title}</h4>
               <p>{data.Year}</p>
-              {likedMovie.length !== 0 && <AiTwotoneHeart className="liked" />}
+              {userInfo.length !== 0 && likedMovie.length !== 0 && (
+                <AiTwotoneHeart className="liked" />
+              )}
             </div>
           </div>
         </div>
