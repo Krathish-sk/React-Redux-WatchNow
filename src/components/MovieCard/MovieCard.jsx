@@ -10,10 +10,6 @@ export default function MovieCard({ data }) {
   const likedMovie = likedMovies.filter(
     (movie) => movie.imdbID === data.imdbID
   );
-  console.log(
-    "🚀 ~ file: MovieCard.jsx:15 ~ MovieCard ~ likedMovie:",
-    likedMovie
-  );
 
   return (
     <div className="card-item">
