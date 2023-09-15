@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 81.5vh;
+  height: auto;
 
   .edit-profile {
     display: flex;
@@ -102,6 +102,22 @@
       color: #b9b4c7;
       word-wrap: break-word;
     }
+  }
+}
+
+.like-section {
+  padding: 2px;
+  margin-top: 10px;
+
+  h1 {
+    font-weight: 400;
+    color: white;
+    text-align: center;
+  }
+
+  .no-items {
+    color: $font-secondary;
+    text-align: center;
   }
 }
 

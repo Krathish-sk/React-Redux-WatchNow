@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AiTwotoneHeart } from "react-icons/ai";
 import "./MovieCard.scss";
-import { useEffect } from "react";
 
 export default function MovieCard({ data }) {
   const { likedMovies, likedShows, userInfo } = useSelector(

@@ -4,6 +4,7 @@ export const Settings = {
   speed: 500,
   slidesToShow: 6,
   slidesToScroll: 3,
+  adaptiveHeight: true,
   responsive: [
     {
       breakpoint: 1500,
@@ -38,6 +39,8 @@ export const Settings = {
         slidesToShow: 2,
         slidesToScroll: 2,
         initialSlide: 2,
+        infinite: true,
+        dots: false,
       },
     },
     {
