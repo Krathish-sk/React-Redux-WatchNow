@@ -3,13 +3,26 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AiTwotoneHeart } from "react-icons/ai";
 import "./MovieCard.scss";
+import { useEffect } from "react";
 
 export default function MovieCard({ data }) {
-  const { likedMovies, userInfo } = useSelector((state) => state.user);
+  const { likedMovies, likedShows, userInfo } = useSelector(
+    (state) => state.user
+  );
 
+  const likedShow = likedShows.filter((show) => show.imdbID === data.imdbID);
   const likedMovie = likedMovies.filter(
     (movie) => movie.imdbID === data.imdbID
   );
+
+  const classNameForLike =
+    data.Type === "movie"
+      ? likedMovie?.length !== 0
+        ? "liked"
+        : "liked-false"
+      : likedShow?.length !== 0
+      ? "liked"
+      : "liked-false";
 
   return (
     <div className="card-item">
@@ -22,8 +35,8 @@ export default function MovieCard({ data }) {
             <div className="card-info">
               <h4>{data.Title}</h4>
               <p>{data.Year}</p>
-              {userInfo.length !== 0 && likedMovie.length !== 0 && (
-                <AiTwotoneHeart className="liked" />
+              {userInfo.length !== 0 && (
+                <AiTwotoneHeart className={classNameForLike} />
               )}
             </div>
           </div>

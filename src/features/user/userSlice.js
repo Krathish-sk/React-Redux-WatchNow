@@ -7,6 +7,9 @@ const initialState = {
   likedMovies: localStorage.getItem("likedMovies")
     ? JSON.parse(localStorage.getItem("likedMovies"))
     : [],
+  likedShows: localStorage.getItem("likedShows")
+    ? JSON.parse(localStorage.getItem("likedShows"))
+    : [],
 };
 
 const userSlice = createSlice({
@@ -19,15 +22,21 @@ const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.userInfo = null;
-      localStorage.clear();
+      localStorage.removeItem("userInfo");
     },
     userLikedMovies: (state, action) => {
       const likedMovie = action.payload;
       state.likedMovies = likedMovie;
       localStorage.setItem("likedMovies", JSON.stringify(state.likedMovies));
     },
+    userLikedShows: (state, action) => {
+      const likedShow = action.payload;
+      state.likedShows = likedShow;
+      localStorage.setItem("likedShows", JSON.stringify(state.likedShows));
+    },
   },
 });
 
-export const { updateUser, logoutUser, userLikedMovies } = userSlice.actions;
+export const { updateUser, logoutUser, userLikedMovies, userLikedShows } =
+  userSlice.actions;
 export default userSlice.reducer;

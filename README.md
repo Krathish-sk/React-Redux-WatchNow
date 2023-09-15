@@ -14,4 +14,4 @@ _6. react-icons_
 
 ## Features
 
-_Render all movies, Render all shows, Get Single movie/show details, Search movies, User authentication, User profile edit/update_
+_Render all movies, Render all shows, Get Single movie/show details, Search movies, Like a movie, Dislike a movie, User authentication, User profile edit/update_

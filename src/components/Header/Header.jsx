@@ -30,6 +30,7 @@ export default function Header() {
 
   // Sign In User
   async function signInUser() {
+    setOpenLogin((prev) => !prev);
     const { user } = await signInWithPopup(auth, provider);
     const { displayName, email, phoneNumber, photoURL, uid } = user;
     const userDetails = {
@@ -44,6 +45,8 @@ export default function Header() {
 
   // Sign Out User
   async function signOutUser() {
+    setOpenLogin((prev) => !prev);
+
     await signOut(auth);
     dispatch(logoutUser());
   }
@@ -74,7 +77,10 @@ export default function Header() {
           <div className="open-login">
             {userInfo.length !== 0 ? (
               <div className="logedIn">
-                <Link to="/userprofile">
+                <Link
+                  to="/userprofile"
+                  onClick={() => setOpenLogin((prev) => !prev)}
+                >
                   <button>Profile</button>
                 </Link>
                 <button onClick={signOutUser}>Logout</button>

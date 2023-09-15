@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { AiTwotoneHeart } from "react-icons/ai";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDoneOutline } from "react-icons/md";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -11,7 +12,7 @@ import User from "../../images/user.png";
 export default function UserPage() {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [editUser, setEditUser] = useState(true);
+  const [editUser, setEditUser] = useState(false);
   const [name, setName] = useState(userInfo.displayName);
   const [email, setEmail] = useState(userInfo.email);
   const [phone, setPhone] = useState(userInfo.phoneNumber);
@@ -113,6 +114,10 @@ export default function UserPage() {
           </div>
         </div>
         <div className="edit-profile">
+          <AiTwotoneHeart
+            color="rgba(255, 77, 0, 0.862)"
+            style={{ fontSize: "27" }}
+          />
           <FaUserEdit onClick={() => setEditUser((prev) => !prev)} />
           {editUser && <MdDoneOutline onClick={editSubmitHandler} />}
         </div>

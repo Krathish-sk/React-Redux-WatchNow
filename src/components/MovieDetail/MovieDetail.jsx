@@ -7,19 +7,23 @@ import {
   fetchAsyncMovieOrShowDetail,
   removeSelectedMovieOrShow,
 } from "../../features/movies/movieSlice";
-import { userLikedMovies } from "../../features/user/userSlice";
+import { userLikedMovies, userLikedShows } from "../../features/user/userSlice";
 import "./MovieDetail.scss";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const { imdbID } = useParams();
   const { selectedMovieOrShow: data } = useSelector((state) => state.movies);
-  const { likedMovies, userInfo } = useSelector((state) => state.user);
+  const { likedMovies, userInfo, likedShows } = useSelector(
+    (state) => state.user
+  );
 
   // Like or dislike a movie
   function handleLikeMovie() {
+    // Check for login or not
     if (userInfo.length !== 0) {
-      if (liked.length === 0) {
+      // Check the current movie is liked or not else remove the like
+      if (likedMovie.length === 0) {
         const movies = [...likedMovies, data];
         dispatch(userLikedMovies(movies));
       } else {
@@ -33,8 +37,37 @@ export default function MovieDetail() {
     }
   }
 
-  // Check for liked movie
-  const liked = likedMovies.filter((movie) => movie.imdbID === data.imdbID);
+  // Like or Dislike a show
+  function handleLikeShow() {
+    // Check for login or not
+    if (userInfo.length !== 0) {
+      // Check if the show is liked or not else remove the like
+      if (likedShow.length === 0) {
+        const shows = [...likedShows, data];
+        dispatch(userLikedShows(shows));
+      } else {
+        const shows = likedShows.filter((show) => show.imdbID !== data.imdbID);
+        dispatch(userLikedShows(shows));
+      }
+    } else {
+      alert("Please Log-In to add Like");
+    }
+  }
+
+  // Check for liked movie and liked show
+  const likedMovie = likedMovies.filter(
+    (movie) => movie.imdbID === data.imdbID
+  );
+  const likedShow = likedShows.filter((show) => show.imdbID === data.imdbID);
+
+  // Handle Like for movie or show
+  function handleLike() {
+    if (data.Type === "movie") {
+      handleLikeMovie();
+    } else {
+      handleLikeShow();
+    }
+  }
 
   // Get Individual movie/show details
   useEffect(() => {
@@ -43,6 +76,15 @@ export default function MovieDetail() {
       dispatch(removeSelectedMovieOrShow());
     }; // eslint-disable-next-line
   }, []);
+
+  const classNameForLike =
+    data.Type === "movie"
+      ? likedMovie.length === 0
+        ? "liked-false"
+        : "liked"
+      : likedShow.length === 0
+      ? "liked-false"
+      : "liked";
 
   return (
     <div className="main">
@@ -60,8 +102,8 @@ export default function MovieDetail() {
               <div className="title">
                 <div className="movie-title">{data.Title}</div>
                 <AiTwotoneHeart
-                  className={`${liked.length === 0 ? "liked-false" : "liked"}`}
-                  onClick={handleLikeMovie}
+                  className={classNameForLike}
+                  onClick={handleLike}
                 />
               </div>
               <div className="movie-rating">
